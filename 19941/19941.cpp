@@ -9,6 +9,7 @@ int main()
 	scanf("%d %d", &n, &k);
 	hp = (char *)calloc(n, sizeof(char));
 	scanf("%s", hp);
+	
 	for(int i = 0; i < n; i++)
 	{
 		j = -k;
@@ -37,5 +38,5 @@ int main()
 		}
 	}
 	
-	printf("%d", cnt);
+	printf("%d\n", cnt);
 }
