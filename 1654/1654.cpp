@@ -5,9 +5,11 @@ int main()
 {
 	int k, n;
 	int* length;
-	int sum = 0;
+	long long sum = 0;
 	int j = 0;
-	int max_count = 0;
+	int cnt = 0;
+	long long pre;
+	long long tmp_pre;
 	scanf("%d %d", &k, &n);
 	length = (int*)calloc(k, sizeof(int));
 	
@@ -17,20 +19,42 @@ int main()
 		sum += length[i];
 	}
 	sum /= n;
-	while(max_count < n)
+	pre = sum;
+	sum /= 2;
+	for(int i = 0; i < 120; i++)
 	{
-		//printf("mid %d\n", sum);
-		max_count = 0;
+		//printf("sum %lld ", sum);
 		j = 0;
-		while(j <= k)
+		cnt = 0;
+		while(j < k)
 		{
-			if(length[j]/sum)
-			{
-				max_count += length[j]/sum;
-			}
+			cnt += length[j] / sum;
 			j++;
 		}
-		sum--;
+		
+		int a = pre - sum;
+		if(a < 0)
+		{
+			a *= -1;
+		}
+		if(cnt > n)
+		{
+			tmp_pre = sum;
+			sum += a/2;
+			pre = tmp_pre;
+		}
+		else if(cnt == n)
+		{
+			break;
+		}
+		else
+		{
+			tmp_pre = sum;
+			sum -= a/2;
+			pre = tmp_pre;
+		}
+			//printf("cnt %d\n", cnt);
 	}
-	printf("%d\n", sum+1);
+	
+	printf("%lld\n", sum);
 }
